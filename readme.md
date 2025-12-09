@@ -22,3 +22,15 @@ This will effectively **restrict usage for users**, preventing them from floodin
 
 #### Footnotes
 I plan to add more features, perhaps a dashboard to check analytics, or maybe create another project based on this. If you have good features to add, feel free to **fork and contribute to this repo**.
+
+#### Known Issue Tracker
+[(✓)] Request handler was stuck due to absence of return;
+[(✓)] Request count was checked before it was incremented;
+[(✓)] Potential memeory overload witLh unregistered paths
+[(✓)] No debug routes
+
+[(!)] No persistent storage
+[(!)] No IP normalization / cleaning
+
+#### Known Limitations:
+Currently counts per base path only. If you want query-sensitive or dynamic route handling, the limiter ignores the differences.
