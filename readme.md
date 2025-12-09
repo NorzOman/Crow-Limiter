@@ -20,17 +20,18 @@ A simple, **header-only module** to implement rate limiting for each path, exclu
 #### Why Use This?
 This will effectively **restrict usage for users**, preventing them from flooding any resources. However, it is important to note that this throttling is performed only on the **application layer**, **not the network layer**. Therefore, it will **not directly protect against various types of DDoS attacks**.
 
+#### Known Issue Tracker
+
+* [x] Request handler was stuck due to absence of return;
+* [x] Request count was checked before it was incremented;
+* [x] Potential memory overload with unregistered paths
+* [x] No debug routes
+* [ ] No persistent storage
+* [ ] No IP cleaning
+      
+#### Known Limitations:
+1. Currently counts per base path only. If you want query-sensitive or dynamic route handling, the limiter ignores the differences.
+2. Mutex can lead to bottlenecking , negating the point of using multithreading in first place.
+
 #### Footnotes
 I plan to add more features, perhaps a dashboard to check analytics, or maybe create another project based on this. If you have good features to add, feel free to **fork and contribute to this repo**.
-
-#### Known Issue Tracker
-[(✓)] Request handler was stuck due to absence of return;
-[(✓)] Request count was checked before it was incremented;
-[(✓)] Potential memeory overload witLh unregistered paths
-[(✓)] No debug routes
-
-[(!)] No persistent storage
-[(!)] No IP normalization / cleaning
-
-#### Known Limitations:
-Currently counts per base path only. If you want query-sensitive or dynamic route handling, the limiter ignores the differences.
