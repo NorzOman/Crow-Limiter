@@ -29,27 +29,6 @@ struct limiter
         routeDefinitions[path] = limit;
     }
 
-    // -- debug functions to print the debug info (will be disabled in prod) --
-    static void debug() {
-        std::cout << "--- Route Definitions ---\n";
-        for (const auto& [path, limits] : routeDefinitions) {
-            std::cout << "Path: " << path
-                      << ", Rate: " << limits.first
-                      << ", Window: " << limits.second << "s\n";
-        }
-
-        std::cout << "--- Client Usage  ---\n";
-        for (const auto& [client_ip, path_map] : clientUsage) {
-            std::cout << "Client IP: " << client_ip << "\n";
-            for (const auto& [path, usage] : path_map) {
-                std::cout << "  Path: " << path
-                          << ", Count: " << usage.first
-                          << ", Window Start: " << usage.second << "\n";
-            }
-        }
-        std::cout << "----------------------------\n";
-    }
-
     // -- main logic function handling --
     void before_handle(crow::request& req, crow::response& res, context& ctx)
     {
@@ -87,6 +66,27 @@ struct limiter
                 }
             }
         }
+    }
+
+    // -- debug functions to print the debug info (will be disabled in prod) --
+    static void debug() {
+        std::cout << "--- Route Definitions ---\n";
+        for (const auto& [path, limits] : routeDefinitions) {
+            std::cout << "Path: " << path
+                      << ", Rate: " << limits.first
+                      << ", Window: " << limits.second << "s\n";
+        }
+
+        std::cout << "--- Client Usage  ---\n";
+        for (const auto& [client_ip, path_map] : clientUsage) {
+            std::cout << "Client IP: " << client_ip << "\n";
+            for (const auto& [path, usage] : path_map) {
+                std::cout << "  Path: " << path
+                          << ", Count: " << usage.first
+                          << ", Window Start: " << usage.second << "\n";
+            }
+        }
+        std::cout << "----------------------------\n";
     }
 
     void after_handle(crow::request& req, crow::response& res, context& ctx)
